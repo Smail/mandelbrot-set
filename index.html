@@ -52,39 +52,16 @@
         <section class="settings">
             <h2 class="title">Position</h2>
 
-            <label for="pos-x" style="margin-right: auto;">
-                X
-                <input id="pos-x"
-                       max="1.5"
-                       min="-1.5"
-                       name="pos-x"
-                       oninput="update()"
-                       step="0.1"
-                       type="number"
-                       value="0">
-            </label>
+            <div style="display: grid; grid-template-columns: 1fr 1fr">
+                <label for="pos-x">Position X</label>
+                <input id="pos-x" max="1.5" min="-1.5" oninput="update()" step="0.1" type="number" value="0">
 
-            <label for="pos-y">
-                Y
-                <input id="pos-y"
-                       max="1.5"
-                       min="-1.5"
-                       name="pos-y"
-                       oninput="update()"
-                       step="0.1"
-                       type="number"
-                       value="0">
-            </label>
+                <label for="pos-y">Position Y</label>
+                <input id="pos-y" max="1.5" min="-1.5" oninput="update()" step="0.1" type="number" value="0">
 
-            <label for="zoom">
-                Zoom
-                <input id="zoom"
-                       name="zoom"
-                       oninput="update()"
-                       step="1"
-                       type="number"
-                       value="6">
-            </label>
+                <label for="zoom">Zoom</label>
+                <input id="zoom" name="zoom" oninput="update()" step="1" type="number" value="6">
+            </div>
 
             <h3 class="title">Zoom Function</h3>
             <label style="margin-right: auto;">
