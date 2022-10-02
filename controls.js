@@ -2,7 +2,7 @@ let isPointerDown = false;
 let lastX, lastY;
 
 addEventListener("pointerdown", (e) => {
-  if (!e.isPrimary) return;
+  if (!e.isPrimary || document.getElementById("settings").contains(e.target)) return;
   isPointerDown = true;
   lastX = e.clientX;
   lastY = e.clientY;
