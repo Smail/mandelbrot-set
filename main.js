@@ -56,6 +56,18 @@ const settings = {
 
     return [value(redFactorEl), value(greenFactorEl), value(blueFactorEl)];
   },
+  get backgroundColor() {
+    function value(id) {
+      return Math.min(Math.max(0, Number.parseFloat(document.getElementById(id).value)), 1);
+    }
+
+    return [
+      value("bg-red"),
+      value("bg-green"),
+      value("bg-blue"),
+      1
+    ]
+  },
 }
 
 function setCustomZoomFunction(value) {
@@ -74,7 +86,7 @@ function drawFrame() {
 
   render.setOutput([window.innerWidth, window.innerHeight]);
   render(window.innerWidth, window.innerHeight, settings.posX, settings.posY, settings.zoomFunction(settings.zoom),
-    settings.colorFactors);
+    settings.backgroundColor, settings.colorFactors);
 
   mandelbrotCanvas.replaceWith(render.canvas);
   render.canvas.id = "mandelbrot-canvas";
@@ -95,12 +107,12 @@ function update() {
 }
 
 const gpu = new GPU();
-const render = gpu.createKernel(function (width, height, posX, posY, zoom, colorFactors) {
+const render = gpu.createKernel(function (width, height, posX, posY, zoom, bgColor, colorFactors) {
   const maxIter = this.constants.iterations;
   const px = this.thread.x;
   const py = this.thread.y;
 
-  this.color(1, 1, 1, 1);
+  this.color(bgColor[0], bgColor[1], bgColor[2], bgColor[3]);
 
   const x0 = (px - width / 2) / zoom + posX;
   const y0 = (py - height / 2) / zoom - posY;
