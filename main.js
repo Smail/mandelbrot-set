@@ -86,7 +86,7 @@ const render = gpu.createKernel(function (width, height, posX, posY, zoom) {
 
   this.color(1, 1, 1, 1);
 
-  const x0 = (px - width / 2) / zoom - posX;
+  const x0 = (px - width / 2) / zoom + posX;
   const y0 = (py - height / 2) / zoom - posY;
   let x = 0.0;
   let y = 0.0;

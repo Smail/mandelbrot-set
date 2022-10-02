@@ -19,7 +19,7 @@ addEventListener("pointermove", (e) => {
   const deltaX = e.clientX - lastX;
   const deltaY = e.clientY - lastY;
 
-  settings.posX += deltaX / settings.zoomFunction(settings.zoom);
+  settings.posX -= deltaX / settings.zoomFunction(settings.zoom);
   settings.posY -= deltaY / settings.zoomFunction(settings.zoom);
 
   // Prevent user from selecting text in the settings section when moving around with the mouse
