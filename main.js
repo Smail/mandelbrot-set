@@ -61,7 +61,17 @@ function drawFrame() {
   render.canvas.id = "mandelbrot-canvas";
 }
 
+let lastFrameTime = 0;
+
 function update() {
+  const diff = performance.now() - lastFrameTime;
+  const fps = 60;
+
+  if (diff < 1000 / fps) {
+    return;
+  }
+
+  lastFrameTime = performance.now();
   requestAnimationFrame(drawFrame);
 }
 
