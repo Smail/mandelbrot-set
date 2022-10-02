@@ -1,11 +1,14 @@
 const settings = {
+  positionClipValue: 1.5,
   set posX(value) {
+    value = (value < 0 ? -1 : 1) * Math.min(this.positionClipValue, Math.abs(value));
     return document.getElementById("pos-x").value = value;
   },
   get posX() {
     return eval(document.getElementById("pos-x").value);
   },
   set posY(value) {
+    value = (value < 0 ? -1 : 1) * Math.min(this.positionClipValue, Math.abs(value));
     return document.getElementById("pos-y").value = value;
   },
   get posY() {
