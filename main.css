@@ -28,6 +28,10 @@ body {
     border-bottom-left-radius: 0.5em;
 }
 
+#settings.closed {
+    background: transparent;
+}
+
 .settings {
     display: flex;
     flex-direction: column;
@@ -45,4 +49,20 @@ body {
 
 .empty {
     flex: 1;
+}
+
+.show-sidebar-btn {
+    cursor: pointer;
+    align-self: flex-start;
+    margin-top: auto;
+    border: none;
+    transition: all 250ms ease-in-out;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.show-sidebar-btn:hover {
+    scale: 1.1;
 }

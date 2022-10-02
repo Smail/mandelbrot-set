@@ -141,3 +141,23 @@ const render = gpu.createKernel(function (width, height, posX, posY, zoom, bgCol
 
 window.addEventListener("resize", update);
 update();
+
+function toggleShowSideBarBtn() {
+  const closed = document.getElementById("show-sidebar-btn-closed");
+  const open = document.getElementById("show-sidebar-btn-open");
+  const tmp = open.style.display;
+  const isOpen = open.style.display === 'none';
+
+  open.style.display = closed.style.display;
+  closed.style.display = tmp;
+
+  const settings = document.getElementById("settings");
+  const children = Array.from(settings.children).filter(el => !el.classList.contains("show-sidebar-btn"));
+  children.forEach(el => el.style.display = isOpen ? null : 'none');
+
+  if (!isOpen) {
+    settings.classList.add("closed");
+  } else {
+    settings.classList.remove("closed");
+  }
+}
