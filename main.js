@@ -107,7 +107,7 @@ const render = gpu.createKernel(function (width, height, posX, posY, zoom) {
     }
   }
 }, {
-  constants: {iterations: 1000}
+  constants: {iterations: 200}
 }).setDynamicOutput(true)
   .setGraphical(true);
 
