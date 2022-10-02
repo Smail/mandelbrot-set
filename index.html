@@ -30,6 +30,21 @@
         </section>
 
         <section class="settings">
+            <h2 class="title">Color Factors</h2>
+            <span>Change how much of each color should be present in the generated image.</span>
+            <div style="display: grid; grid-template-columns: 1fr 1fr">
+                <label for="red-factor">Red</label>
+                <input id="red-factor" max="100" min="1" oninput="update()" type="range" value="80">
+
+                <label for="green-factor">Green</label>
+                <input id="green-factor" max="100" min="1" oninput="update()" type="range" value="10">
+
+                <label for="blue-factor">Blue</label>
+                <input id="blue-factor" max="100" min="1" oninput="update()" type="range" value="80">
+            </div>
+        </section>
+
+        <section class="settings">
             <h2 class="title">Position</h2>
 
             <label for="pos-x" style="margin-right: auto;">

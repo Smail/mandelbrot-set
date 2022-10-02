@@ -45,6 +45,17 @@ const settings = {
       }
     }
   },
+  get colorFactors() {
+    function value(el) {
+      return Number.parseInt(el.max) - Number.parseInt(el.value) + Number.parseInt(el.min);
+    }
+
+    const redFactorEl = document.getElementById("red-factor");
+    const greenFactorEl = document.getElementById("green-factor");
+    const blueFactorEl = document.getElementById("blue-factor");
+
+    return [value(redFactorEl), value(greenFactorEl), value(blueFactorEl)];
+  },
 }
 
 function setCustomZoomFunction(value) {
@@ -62,7 +73,8 @@ function drawFrame() {
   setCanvasSize(mandelbrotCanvas);
 
   render.setOutput([window.innerWidth, window.innerHeight]);
-  render(window.innerWidth, window.innerHeight, settings.posX, settings.posY, settings.zoomFunction(settings.zoom));
+  render(window.innerWidth, window.innerHeight, settings.posX, settings.posY, settings.zoomFunction(settings.zoom),
+    settings.colorFactors);
 
   mandelbrotCanvas.replaceWith(render.canvas);
   render.canvas.id = "mandelbrot-canvas";
@@ -83,7 +95,7 @@ function update() {
 }
 
 const gpu = new GPU();
-const render = gpu.createKernel(function (width, height, posX, posY, zoom) {
+const render = gpu.createKernel(function (width, height, posX, posY, zoom, colorFactors) {
   const maxIter = this.constants.iterations;
   const px = this.thread.x;
   const py = this.thread.y;
@@ -102,9 +114,9 @@ const render = gpu.createKernel(function (width, height, posX, posY, zoom) {
 
     if (xTemp > maxIter) {
       const tNormal = i / maxIter;
-      const red = tNormal * (Math.cos(i) + 1) / 2;
-      const green = tNormal;
-      const blue = tNormal * 0.5;
+      const red = tNormal * (Math.sin(i) + (maxIter / colorFactors[0]) + 1) / 2;
+      const green = tNormal * (Math.sin(i) + (maxIter / colorFactors[1]) + 1) / 2;
+      const blue = tNormal * (Math.sin(i) + (maxIter / colorFactors[2]) + 1) / 2;
 
       this.color(red, green, blue, 1);
       break;
