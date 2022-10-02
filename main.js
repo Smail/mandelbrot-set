@@ -6,3 +6,5 @@ function setCanvasSize(canvas) {
 }
 
 setCanvasSize(mandelbrotCanvas);
+
+const ctx = mandelbrotCanvas.getContext("2d");
