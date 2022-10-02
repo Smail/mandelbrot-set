@@ -1,3 +1,8 @@
+let posX = 0;
+let posY = 0;
+let zoom = 6;
+let zoomFunction = Math.exp;
+
 function setCanvasSize(canvas) {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
@@ -8,23 +13,22 @@ function drawFrame() {
   setCanvasSize(mandelbrotCanvas);
 
   render.setOutput([window.innerWidth, window.innerHeight]);
-  render(window.innerWidth, window.innerHeight);
+  render(window.innerWidth, window.innerHeight, posX, posY, zoomFunction(zoom));
 
   mandelbrotCanvas.replaceWith(render.canvas);
   render.canvas.id = "mandelbrot-canvas";
 }
 
 const gpu = new GPU();
-const render = gpu.createKernel(function (width, height) {
+const render = gpu.createKernel(function (width, height, posX, posY, zoom) {
   const maxIter = this.constants.iterations;
   const px = this.thread.x;
   const py = this.thread.y;
 
   this.color(1, 1, 1, 1);
 
-  const zoom = Math.exp(6);
-  const x0 = (px - width / 2) / zoom;
-  const y0 = (py - height / 2) / zoom;
+  const x0 = (px - width / 2 - posX) / zoom;
+  const y0 = (py - height / 2 - posY) / zoom;
   let x = 0.0;
   let y = 0.0;
 
