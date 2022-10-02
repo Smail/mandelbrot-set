@@ -1,9 +1,18 @@
 const settings = {
+  set posX(value) {
+    return document.getElementById("pos-x").value = value;
+  },
   get posX() {
     return eval(document.getElementById("pos-x").value);
   },
+  set posY(value) {
+    return document.getElementById("pos-y").value = value;
+  },
   get posY() {
     return eval(document.getElementById("pos-y").value);
+  },
+  set zoom(value) {
+    return document.getElementById("zoom").value = value;
   },
   get zoom() {
     return eval(document.getElementById("zoom").value);
