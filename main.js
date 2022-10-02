@@ -5,6 +5,7 @@ function setCanvasSize(canvas) {
 
 function drawFrame() {
   const mandelbrotCanvas = document.getElementById("mandelbrot-canvas");
+  setCanvasSize(mandelbrotCanvas);
 
   render.setOutput([window.innerWidth, window.innerHeight]);
   render(window.innerWidth, window.innerHeight);
@@ -21,8 +22,9 @@ const render = gpu.createKernel(function (width, height) {
 
   this.color(1, 1, 1, 1);
 
-  const x0 = (px / width) * (2.47) - 2;
-  const y0 = (py / height) * (2.47) - 1.12;
+  const zoom = Math.exp(6);
+  const x0 = (px - width / 2) / zoom;
+  const y0 = (py - height / 2) / zoom;
   let x = 0.0;
   let y = 0.0;
 
@@ -47,3 +49,4 @@ const render = gpu.createKernel(function (width, height) {
   .setGraphical(true);
 
 requestAnimationFrame(drawFrame);
+window.addEventListener("resize", () => requestAnimationFrame(drawFrame));
