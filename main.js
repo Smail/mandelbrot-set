@@ -15,6 +15,10 @@ const settings = {
     return eval(document.getElementById("pos-y").value);
   },
   set zoom(value) {
+    // Prevent user from zooming in too far, i.e., everything is one big blob of color.
+    if (this.zoomFunction(value) >= 1318815734) {
+      return;
+    }
     return document.getElementById("zoom").value = Math.max(1, value);
   },
   get zoom() {
