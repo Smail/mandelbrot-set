@@ -10,5 +10,87 @@
 </head>
 <body>
 <canvas id="mandelbrot-canvas"></canvas>
+<div class="wrapper">
+    <div class="empty"></div>
+    <section id="settings" class="settings">
+        <h1 class="title">Settings</h1>
+
+        <section class="settings">
+            <h2 class="title">Background Color</h2>
+            <label for="white-bg">
+                <input id="white-bg" checked name="bg-color" type="radio">
+                White
+            </label>
+            <label for="black-bg">
+                <input id="black-bg" name="bg-color" type="radio">
+                Black
+            </label>
+        </section>
+
+        <section class="settings">
+            <h2 class="title">Position</h2>
+
+            <label for="pos-x" style="margin-right: auto;">
+                X
+                <input id="pos-x"
+                       name="pos-x"
+                       oninput="update()"
+                       step="1"
+                       type="number"
+                       value="0">
+            </label>
+
+            <label for="pos-y">
+                Y
+                <input id="pos-y"
+                       name="pos-y"
+                       oninput="update()"
+                       step="1"
+                       type="number"
+                       value="0">
+            </label>
+
+            <label for="zoom">
+                Zoom
+                <input id="zoom"
+                       name="zoom"
+                       oninput="update()"
+                       step="1"
+                       type="number"
+                       value="6">
+            </label>
+
+            <h3 class="title">Zoom Function</h3>
+            <label style="margin-right: auto;">
+                <input name="zoom-function"
+                       oninput="update()"
+                       type="radio"
+                       value="x => x">
+                Linear
+            </label>
+            <label style="margin-right: auto;">
+                <input checked
+                       name="zoom-function"
+                       oninput="update()"
+                       type="radio"
+                       value="x => Math.exp(x)">
+                Exponential
+            </label>
+            <label style="margin-right: auto;">
+                <input id="custom-zoom-func-radio-btn"
+                       name="zoom-function"
+                       oninput="update()"
+                       value=""
+                       type="radio">
+                Custom
+            </label>
+            <label>
+                Custom zoom function (Hint: Argument is called "x")
+                <input onchange="setCustomZoomFunction(event.target.value)"
+                       type="text">
+            </label>
+        </section>
+    </section>
+</div>
 </body>
 </html>

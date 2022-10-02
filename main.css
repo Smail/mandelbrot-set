@@ -1,7 +1,14 @@
+:root {
+    font-family: sans-serif;
+}
+
 body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
 #mandelbrot-canvas {
@@ -10,4 +17,32 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
+    z-index: -1;
+}
+
+#settings {
+    background: rgba(255, 255, 255, 0.5);
+    padding: 0.5em 1em;
+    backdrop-filter: blur(0.1em);
+    border-top-left-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
+}
+
+.settings {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.settings .title {
+    margin: 0;
+}
+
+.wrapper {
+    flex: 1;
+    display: flex;
+}
+
+.empty {
+    flex: 1;
 }

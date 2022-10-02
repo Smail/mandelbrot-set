@@ -1,7 +1,40 @@
-let posX = 0;
-let posY = 0;
-let zoom = 6;
-let zoomFunction = Math.exp;
+const settings = {
+  get posX() {
+    return eval(document.getElementById("pos-x").value);
+  },
+  get posY() {
+    return eval(document.getElementById("pos-y").value);
+  },
+  get zoom() {
+    return eval(document.getElementById("zoom").value);
+  },
+  get zoomFunction() {
+    const checkedInput = () => document.querySelector('input[name="zoom-function"]:checked');
+    const userFunction = checkedInput().value;
+
+    try {
+      // Try executing the function to catch any errors
+      eval(userFunction)(0);
+      return eval(userFunction);
+    } catch (e) {
+      if (userFunction.length > 0) {
+        alert(`Invalid zoom function: "${checkedInput().value}"\nError: ${e.message}`);
+
+        // Set a different (random) zoom function and return it if possible
+        document.querySelector('input[name="zoom-function"]:not(:checked)').checked = true;
+        return eval(checkedInput().value);
+      } else {
+        // Return linear function if user hasn't supplied any function, yet.
+        return x => x;
+      }
+    }
+  },
+}
+
+function setCustomZoomFunction(value) {
+  document.getElementById('custom-zoom-func-radio-btn').value = `x => ${value}`;
+  update();
+}
 
 function setCanvasSize(canvas) {
   canvas.width = window.innerWidth;
@@ -13,10 +46,14 @@ function drawFrame() {
   setCanvasSize(mandelbrotCanvas);
 
   render.setOutput([window.innerWidth, window.innerHeight]);
-  render(window.innerWidth, window.innerHeight, posX, posY, zoomFunction(zoom));
+  render(window.innerWidth, window.innerHeight, settings.posX, settings.posY, settings.zoomFunction(settings.zoom));
 
   mandelbrotCanvas.replaceWith(render.canvas);
   render.canvas.id = "mandelbrot-canvas";
+}
+
+function update() {
+  requestAnimationFrame(drawFrame);
 }
 
 const gpu = new GPU();
@@ -52,5 +89,5 @@ const render = gpu.createKernel(function (width, height, posX, posY, zoom) {
 }).setDynamicOutput(true)
   .setGraphical(true);
 
-requestAnimationFrame(drawFrame);
-window.addEventListener("resize", () => requestAnimationFrame(drawFrame));
+window.addEventListener("resize", update);
+update();
