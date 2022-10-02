@@ -12,7 +12,7 @@ const settings = {
     return eval(document.getElementById("pos-y").value);
   },
   set zoom(value) {
-    return document.getElementById("zoom").value = value;
+    return document.getElementById("zoom").value = Math.max(1, value);
   },
   get zoom() {
     return eval(document.getElementById("zoom").value);

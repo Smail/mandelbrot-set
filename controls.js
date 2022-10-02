@@ -35,8 +35,7 @@ addEventListener("wheel", (e) => {
   let zoomDelta = e.deltaY < 0 ? 1 : -1;
   if (e.shiftKey) zoomDelta *= 10;
 
-  console.log(zoomDelta);
-  settings.zoom += zoomDelta;
+  settings.zoom = settings.zoom + zoomDelta;
 
   update();
 });
