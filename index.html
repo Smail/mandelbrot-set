@@ -35,9 +35,11 @@
             <label for="pos-x" style="margin-right: auto;">
                 X
                 <input id="pos-x"
+                       max="1.5"
+                       min="-1.5"
                        name="pos-x"
                        oninput="update()"
-                       step="1"
+                       step="0.1"
                        type="number"
                        value="0">
             </label>
@@ -45,9 +47,11 @@
             <label for="pos-y">
                 Y
                 <input id="pos-y"
+                       max="1.5"
+                       min="-1.5"
                        name="pos-y"
                        oninput="update()"
-                       step="1"
+                       step="0.1"
                        type="number"
                        value="0">
             </label>
