@@ -8,7 +8,10 @@ addEventListener("pointerdown", (e) => {
   lastY = e.clientY;
 });
 
-addEventListener("pointerup", () => isPointerDown = false);
+addEventListener("pointerup", () => {
+  isPointerDown = false;
+  document.body.style.userSelect = null;
+});
 
 addEventListener("pointermove", (e) => {
   if (!isPointerDown) return;
@@ -19,8 +22,8 @@ addEventListener("pointermove", (e) => {
   settings.posX += deltaX / settings.zoomFunction(settings.zoom);
   settings.posY -= deltaY / settings.zoomFunction(settings.zoom);
 
-  // document.getElementById("current-pos-x").textContent = settings.posX.toString();
-  // document.getElementById("current-pos-y").textContent = settings.posY.toString();
+  // Prevent user from selecting text in the settings section when moving around with the mouse
+  document.body.style.userSelect = "none";
 
   lastX = e.clientX;
   lastY = e.clientY;
