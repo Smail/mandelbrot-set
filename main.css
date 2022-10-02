@@ -21,7 +21,7 @@ body {
 }
 
 #settings {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.75);
     padding: 0.5em 1em;
     backdrop-filter: blur(0.1em);
     border-top-left-radius: 0.5em;
